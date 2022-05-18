@@ -53,6 +53,10 @@ Route::middleware('auth')->group(function () {
     Route::get('profile/{user}/detail', [profileController::class, 'viewDetail'])->name('detail');
 
     Route::put('profile/{user}/detail/update', [profileController::class, 'update'])->name('profile.update');
+
+    Route::put('profile/{user}/detail/updateBackground', [profileController::class, 'updateBackground'])->name('profile.updateBg');
+
+    Route::put('profile/{user}/detail/updatePassword', [profileController::class, 'updatePassword'])->name('profile.updatePw');
 });
 
 

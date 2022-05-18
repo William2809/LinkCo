@@ -80,7 +80,7 @@
                 <div class="text-lime-300 mt-[56px]">
                     <form action="{{ route('profile.update', Auth::user()->username) }}" method="POST">
                         @csrf
-                        @method("put")
+                        @method('put')
                         <div class="mb-4">
                             <p class="text-green-100 text-heading5 font-semibold mb-2">Email</p>
                             <x-inputDetail type="email" name="email" id="email" value="{{ $user->email }}">
@@ -138,26 +138,64 @@
 
                         <x-button>Save Changes</x-button>
                     </form>
+
                 </div>
             </div>
 
             <div id="profileBackground" class="hidden">
                 <div>
                     <p class="text-heading2 text-green-100 font-semibold">Account</p>
-                    <p class="text-heading3 text-lime-300 font-semibold">Edit Profile</p>
+                    <p class="text-heading4 text-lime-300 font-semibold">Edit Profile</p>
                 </div>
                 <div class="text-lime-300">
-                    profile background
+                    <form action="{{ route('profile.updateBg', Auth::user()->username) }}" method="POST">
+                        @method('put')
+                        @csrf
+
+                        <textarea name="background" id="background"
+                            class="border-lime-300 border-2 bg-green-900 w-[880px] h-[500px] rounded-[12px] text-green-100">{{ $user->background }}</textarea>
+
+                        <x-button>Save Changes</x-button>
+                    </form>
+
                 </div>
             </div>
 
             <div id="changePassword" class="hidden">
                 <div>
                     <p class="text-heading2 text-green-100 font-semibold">Account</p>
-                    <p class="text-heading3 text-lime-300 font-semibold">Edit Profile</p>
+                    <p class="text-heading4 text-lime-300 font-semibold">Edit Profile</p>
                 </div>
-                <div class="text-lime-300">
-                    change password
+                <div class="text-green-100">
+                    <form action="{{ route('profile.updatePw', Auth::user()->username) }}" method="post">
+                        @method('put')
+                        @csrf
+
+                        <div class="mb-5">
+                            <p class="text-green-100 text-heading5 font-semibold mb-2">Current Password</p>
+                            <x-input class="mt-1 w-full" type="password" name="current_password"
+                                id="current_password" placeholder="******" />
+                            @error('current_password')
+                                <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-5">
+                            <p class="text-green-100 text-heading5 font-semibold mb-2">New Password</p>
+                            <x-input class="mt-1 w-full" type="password" name="password" id="password" />
+                            @error('password')
+                                <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-5">
+                            <p class="text-green-100 text-heading5 font-semibold mb-2">Confirm Password</p>
+                            <x-input class="mt-1 w-full" type="password" name="password_confirmation"
+                                id="password_confirmation" />
+                            @error('password_confirmation')
+                                <div class="text-red-500 mt-2 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <x-button>Update</x-button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -173,9 +211,6 @@
 
 
 
-<script>
-    import Datepicker from '@themesberg/tailwind-datepicker/Datepicker';
-</script>
 <script>
     function yourProfile() {
         var yourProfile = document.getElementById("yourProfile");
@@ -303,7 +338,7 @@
         var btn_changePassword = document.getElementById("btn-changePassword");
 
 
-        if (changePassword.style.display === "none") {
+        if (changePassword.style.display != "block") {
             yourProfile.style.display = "none";
             profileBackground.style.display = "none";
             editProfile.style.display = "none";
