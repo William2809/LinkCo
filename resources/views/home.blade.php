@@ -72,7 +72,9 @@
                                     </div>
                                     <div class="flex">
                                         <div class="text-body text-lime-300">
-                                            {{ $user->role }}
+                                            @if ($user->userType === 'Supplier')
+                                                {{ $user->sector }} {{ $user->userType }} <p> .</p>
+                                            @endif
                                         </div>
                                         <div class=" text-body text-lime-300">
                                             {{ $user->pivot->created_at->diffForHumans() }}

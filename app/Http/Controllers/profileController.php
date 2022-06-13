@@ -71,6 +71,7 @@ class profileController extends Controller
             auth()->user()->update(['password' => Hash::make($request->password)]);
             return back()->with('message', 'Your password has been successfully updated');
         }
+
         throw ValidationException::withMessages([
             'current_password' => 'Your current password is wrong',
         ]);

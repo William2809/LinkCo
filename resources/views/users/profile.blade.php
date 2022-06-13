@@ -55,18 +55,18 @@
             <div>
                 <x-card>
                     <div class="flex justify-between items-center">
-                        <div class="text-green-100 text-center px-8">
-                            <p class="text-heading4 font-semibold">0</p>
+                        <a href="" class="text-green-100 text-center px-8">
+                            <p class="text-heading4 font-semibold">{{ $user->postings->count() }}</p>
                             <p class="text-heading5 font-normal">Posts</p>
-                        </div>
-                        <div class="text-green-100 text-center px-8">
+                        </a>
+                        <a class="text-green-100 text-center px-8">
                             <p class="text-heading4 font-semibold">0</p>
                             <p class="text-heading5 font-normal">Following</p>
-                        </div>
-                        <div class="text-green-100 text-center px-8">
+                        </a>
+                        <a class="text-green-100 text-center px-8">
                             <p class="text-heading4 font-semibold">0</p>
                             <p class="text-heading5 font-normal">Follower</p>
-                        </div>
+                        </a>
                     </div>
                 </x-card>
             </div>
