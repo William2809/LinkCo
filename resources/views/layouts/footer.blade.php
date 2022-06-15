@@ -8,9 +8,15 @@
         <a class="px-4" href="">Terms of Services</a>
         <a class="px-4" href="">Contact Us</a>
     </div>
-    <div>
-        <a href="">logo1</a>
-        <a href="">logo2</a>
-        <a href="">logo3</a>
+    <div class="flex">
+        <a href="" class="mx-2">
+            <x-facebook></x-facebook>
+        </a>
+        <a href="" class="mx-2">
+            <x-instagram></x-instagram>
+        </a>
+        <a href="" class="mx-2">
+            <x-twitter></x-twitter>
+        </a>
     </div>
 </div>

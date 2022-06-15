@@ -37,7 +37,7 @@
                                         <a href="{{ route('profile', $user->username) }}">{{ $user->name }}</a>
                                     </div>
                                     <div class="text-lime-300 text-heading6">
-                                        role
+                                        {{ $user->sector }}
                                     </div>
                                 </div>
                                 <div class="text-lime-300 text-heading6 w-[120px]">
@@ -45,7 +45,7 @@
                                         <div class="mr-2">
                                             <x-location-search-icon></x-location-search-icon>
                                         </div>
-                                        <p class="pb-2">place</p>
+                                        <p class="">{{ $user->country }}</p>
                                     </div>
                                     <div>
                                         {{ $user->followings->count() }} followers

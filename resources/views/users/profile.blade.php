@@ -19,34 +19,38 @@
                             <div class="w-8 flex justify-center items-center">
                                 <x-briefcase-icon class="w-10"></x-briefcase-icon>
                             </div>
-                            <p class="text-heading5 text-green-100 ml-4">Sector || Role</p>
+                            <p class="text-heading5 text-lime-300 ml-4"> {{ $user->sector }} ||
+                                {{ $user->userType }}</p>
                         </div>
                         <div class="flex items-center">
                             <div class="w-8 flex justify-center items-center">
                                 <x-location-icon class="w-10"></x-location-icon>
                             </div>
-                            <p class="text-heading5 text-green-100 ml-4">Location, country</p>
+                            <p class="text-heading5 text-green-100 ml-4"> {{ $user->country }}</p>
                         </div>
 
                         @if (Auth::user()->isNot($user))
-                            <form action="{{ route('following.store', $user) }}" method="post">
-                                @csrf
-                                <div class="mt-6">
-                                    <x-button>
-                                        @if (Auth::user()->followings()->where('followed_user_id', $user->id)->first())
-                                            Unfollow
-                                        @else
-                                            Follow
-                                        @endif
-                                    </x-button>
+                            <div class="flex">
+                                <form action="{{ route('following.store', $user) }}" method="post">
+                                    @csrf
+                                    <div class="mt-6">
+                                        <x-button>
+                                            @if (Auth::user()->followings()->where('followed_user_id', $user->id)->first())
+                                                Unfollow
+                                            @else
+                                                Follow
+                                            @endif
+                                        </x-button>
+                                    </div>
+                                </form>
+                                <div class="mt-6 ml-4">
+                                    <x-button><a href="https://wa.me/{{ $user->phone }}">Contact Me</a></x-button>
                                 </div>
-                            </form>
-                            <div class="mt-6">
-                                <x-button>Contact Me</x-button>
                             </div>
                         @else
                             <div class="mt-6">
-                                <x-button>Setting</x-button>
+                                <x-button><a href="{{ route('detail', Auth::user()->username) }}">Setting</a>
+                                </x-button>
                             </div>
                         @endif
                     </div>
@@ -60,11 +64,11 @@
                             <p class="text-heading5 font-normal">Posts</p>
                         </a>
                         <a class="text-green-100 text-center px-8">
-                            <p class="text-heading4 font-semibold">0</p>
+                            <p class="text-heading4 font-semibold">{{ $user->followings->count() }}</p>
                             <p class="text-heading5 font-normal">Following</p>
                         </a>
                         <a class="text-green-100 text-center px-8">
-                            <p class="text-heading4 font-semibold">0</p>
+                            <p class="text-heading4 font-semibold">{{ $user->followers->count() }}</p>
                             <p class="text-heading5 font-normal">Follower</p>
                         </a>
                     </div>
@@ -93,26 +97,11 @@
                     </div>
                     <div id="background" class="block">
                         <p class="text-green-100 text-heading6 font-normal">
-                            TNF is an independent network operator and we are based in Alkmaar, North Holland.
-                            As a full MVNO we deliver high-quality mobile communication services worldwide. As a
-                            result
-                            we have a strong position in the purchase and sales of international mobile data.
-
-                            Because of our global coverage, with more than 750 networks in 200 countries, we can
-                            offer a
-                            complete international M2M & IOT portfolio. No matter what usage, so for high, medium
-                            and
-                            low volume connectivity.
-
-                            Our fixed connectivity portfolio offers an end-to-end solution. So we are delivering
-                            internet connectivity, on all connection types available. Access like DIA, FTTX, VDSL
-                            and
-                            Broadband services. We deliver these services in Europe carrier neutral supporting all
-                            operators active at great wholesale level pricing.
+                            {{ $user->background }}
                         </p>
                     </div>
                     <div id="posts" class="hidden">
-                        <x-postings :postings="$postings"></x-postings>
+                        <x-postings :postings="$user->postings"></x-postings>
                     </div>
                 </x-card>
             </div>
@@ -132,11 +121,12 @@
                                     </div>
                                     <div>
                                         <div class="text-heading4 text-green-100 font-medium">
-                                            {{ $user->name }}
+                                            <a
+                                                href="{{ route('profile', $user->username) }}">{{ $user->name }}</a>
                                         </div>
                                         <div class="flex">
                                             <div class="text-body text-lime-300">
-                                                {{ $user->role }}
+                                                {{ $user->userType }}&nbsp;
                                             </div>
                                             <div class=" text-body text-lime-300">
                                                 {{ $user->pivot->created_at->diffForHumans() }}

@@ -14,7 +14,7 @@
                     <x-postings :postings="$postings"></x-postings>
                 </div>
             </div>
-            <div>
+            {{-- <div>
                 <x-card>
                     <div class="text-heading4 font-semibold text-lime-300 w-[350px]">
                         Trends
@@ -28,7 +28,7 @@
                     </div>
                 </x-card>
 
-            </div>
+            </div> --}}
 
         </div>
     </div>

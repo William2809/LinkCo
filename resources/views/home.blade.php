@@ -24,7 +24,8 @@
                                 <form action="{{ route('posting.store') }}" method="post">
                                     @csrf
                                     <div class="mb-4">
-                                        <textarea name="body" id="body" class="w-full h-[80px] bg-green-800 border-2 border-lime-200 rounded-[16px] placeholder:text-green-600 focus:outline-none focus:border-lime-200 resize-none placeholder:text-heading6"
+                                        <textarea name="body" id="body"
+                                            class="w-full h-[80px] bg-green-800 border-2 border-lime-200 rounded-[16px] placeholder:text-green-600 focus:outline-none focus:border-lime-200 resize-none placeholder:text-heading6"
                                             placeholder="What's on your mind?"></textarea>
                                     </div>
                                     <div class="text-right">
@@ -43,18 +44,6 @@
             </div>
             <div>
                 <x-card>
-                    <div class="text-heading4 font-semibold text-lime-300 w-[350px]">
-                        Trends
-                    </div>
-                    <div>
-                        <a class="text-body mt-5">Health</a>
-                        <a class="text-body mt-5">IoT</a>
-                        <a class="text-body mt-5">Farm</a>
-                        <a class="text-body mt-5">Energy</a>
-                        <a class="text-body mt-5">Job Vacancy</a>
-                    </div>
-                </x-card>
-                <x-card>
                     <div class="mb-5 text-heading4 font-semibold text-lime-300 w-[350px]">
                         Recently follows
                     </div>
@@ -68,12 +57,12 @@
                                 </div>
                                 <div>
                                     <div class="text-heading4 text-green-100 font-medium">
-                                        {{ $user->name }}
+                                        <a href="{{ route('profile', $user->username) }}">{{ $user->name }}</a>
                                     </div>
                                     <div class="flex">
                                         <div class="text-body text-lime-300">
                                             @if ($user->userType === 'Supplier')
-                                                {{ $user->sector }} {{ $user->userType }} <p> .</p>
+                                                {{ $user->sector }} {{ $user->userType }}&nbsp;
                                             @endif
                                         </div>
                                         <div class=" text-body text-lime-300">

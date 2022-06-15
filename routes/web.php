@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\commentController;
 use App\Http\Controllers\exploreController;
 use App\Http\Controllers\followingController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\landingController;
+use App\Http\Controllers\likeController;
 use App\Http\Controllers\postingController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\searchController;
@@ -40,11 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::post('usertype/update', [userTypeController::class, 'store'])->name('usertype.update');
 
     Route::post('posting', [postingController::class, 'store'])->name('posting.store');
-    // Route::prefix('usertype')->group(function () {
-    //     Route::get('new', [userTypeController::class, 'new'])->name('usertype.new');
 
-    //     Route::post('update', [userTypeController::class, 'update'])->name('usertype.update');
-    // });
+
+
 
     Route::post('profile/{user}', [followingController::class, 'store'])->name('following.store');
 
@@ -57,6 +57,11 @@ Route::middleware('auth')->group(function () {
     Route::put('profile/{user}/detail/updateBackground', [profileController::class, 'updateBackground'])->name('profile.updateBg');
 
     Route::put('profile/{user}/detail/updatePassword', [profileController::class, 'updatePassword'])->name('profile.updatePw');
+    //likes
+    Route::post('like/{posting}', [likeController::class, 'store'])->name('like.store');
+
+    //comments
+    Route::post('comment/{posting}', [commentController::class, 'store'])->name('comment.store');
 });
 
 

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Traits\Like;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +13,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Like;
 
     /**
      * The attributes that are mass assignable.
@@ -58,14 +59,28 @@ class User extends Authenticatable
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=" . urlencode($default) . "&s=" . $size;
     }
 
+    //postings
     public function postings() //relationship-> one to many (1 user -> many postings)
     {
         return $this->hasMany(Posting::class);
     }
 
+    //comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
+    //follow and unfollow
     public function followings() //relation
     {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id')->withTimestamps();
+    }
+
+    public function followers() //relation
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'user_id')->withTimestamps();
     }
 
     public function follows(User $user) //action
@@ -82,6 +97,9 @@ class User extends Authenticatable
     {
         return $this->followings()->where('followed_user_id', $user->id)->exists();
     }
+
+
+    //other function
 
     public function homeTimeline()
     {
