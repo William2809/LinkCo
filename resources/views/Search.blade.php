@@ -1,8 +1,5 @@
 <x-app-layout>
-    <div class="flex">
-        <div>
-            <x-back-icon></x-back-icon>
-        </div>
+    <div class="flex mt-8 justify-center">
         <div>
             <form action="/search" method="get">
                 <div class="relative text-green-100 focus-within:text-green-100 ">
@@ -12,7 +9,7 @@
                         </button>
                     </span>
                     <input type="search" name="search"
-                        class="border-none py-2 text-heading6 text-white bg-green-800 text-green-100 rounded-[16px] pl-14 focus:outline-none placeholder:text-green-100 h-[50px] w-[1280px]"
+                        class="border-none py-2 text-heading6 text-white bg-green-800 text-green-100 rounded-[16px] pl-14 focus:outline-none placeholder:text-green-100 h-[50px] w-[1210px]"
                         placeholder="Search Person" autocomplete="off" value="{{ request('search') }}">
                 </div>
             </form>
@@ -48,7 +45,7 @@
                                         <p class="">{{ $user->country }}</p>
                                     </div>
                                     <div>
-                                        {{ $user->followings->count() }} followers
+                                        {{ $user->followers->count() }} followers
                                     </div>
                                 </div>
                             </div>

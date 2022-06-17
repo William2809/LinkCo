@@ -1,5 +1,6 @@
 @foreach ($postings as $posting)
     <x-card>
+        {{-- {{ $posting->id }} --}}
         <div class="flex">
             <div class="flex-shrink-0 mr-4 w-[56px]">
                 <img class="w-14 h-14 rounded-full" src="https://i.pravatar.cc/150" alt="{{ $posting->user->name }}">
@@ -14,23 +15,27 @@
                             {{ $posting->created_at->diffForHumans() }}
                         </div>
                     </div>
-                    <div class="flex items-center">
-                        <form action="{{ route('posting.delete', $posting) }}" method="post" class="flex items-center">
-                            @csrf
-                            <button>
-                                <x-trashIcon></x-trashIcon>
-                            </button>
-                        </form>
-                    </div>
+
+                    @if ($posting->user->id === Auth::user()->id)
+                        <div class="flex items-center">
+                            <form action="{{ route('posting.delete', $posting) }}" method="post"
+                                class="flex items-center">
+                                @csrf
+                                <button>
+                                    <x-trashIcon></x-trashIcon>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
-                <div class="text-heading5 text-green-100 font-normal">
+                <div class="text-heading5 text-green-100 font-normal py-3">
                     {{ $posting->body }}
                 </div>
-                <div class="flex">
+                <div class="flex mt-2">
                     <div class="mr-4">{{ $posting->totalLikes->count() }} Likes</div>
                     <div class="mr-4">{{ $posting->comments->count() }} Comments</div>
                 </div>
-                <div class="flex justify-between">
+                <div class="flex justify-between mt-4">
                     <form action="{{ route('like.store', $posting) }}" method="post">
                         @csrf
                         @if (Auth::user()->likes()->where('post_id', $posting->id)->exists())

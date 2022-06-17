@@ -6,6 +6,7 @@ use App\Http\Controllers\followingController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\landingController;
 use App\Http\Controllers\likeController;
+use App\Http\Controllers\notificationController;
 use App\Http\Controllers\postingController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\searchController;
@@ -57,11 +58,19 @@ Route::middleware('auth')->group(function () {
     Route::put('profile/{user}/detail/updateBackground', [profileController::class, 'updateBackground'])->name('profile.updateBg');
 
     Route::put('profile/{user}/detail/updatePassword', [profileController::class, 'updatePassword'])->name('profile.updatePw');
+
+    Route::get('profile/{user}/followings', [profileController::class, 'viewFollowings'])->name('profile.followings');
+
+    Route::get('profile/{user}/followers', [profileController::class, 'viewFollowers'])->name('profile.followers');
     //likes
     Route::post('like/{posting}', [likeController::class, 'store'])->name('like.store');
 
     //comments
     Route::post('comment/{posting}', [commentController::class, 'store'])->name('comment.store');
+
+    Route::post('comment/{comment}/delete', [commentController::class, 'deleteComment'])->name('comment.delete');
+    //notificatons
+    Route::get('notification', notificationController::class)->name('notification');
 });
 
 

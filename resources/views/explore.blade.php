@@ -3,7 +3,7 @@
 
     <div class="pt-12">
         <div>
-            <h1 class="text-heading1 font-semibold text-green-100">Post a Thread</h1>
+            <h1 class="text-heading1 font-semibold text-green-100">Find Something</h1>
         </div>
 
         <div class="flex text-green-100 justify-between">

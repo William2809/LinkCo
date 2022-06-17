@@ -17,9 +17,9 @@ class Posting extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
+    public function totalLikes()
     {
-        return $this->belongsToMany(Posting::class, 'likes', 'liked_posting_user_id', 'post_id')->withTimestamps();
+        return $this->belongsToMany(Posting::class, 'likes', 'post_id', 'liked_posting_user_id')->withTimestamps();
     }
 
     public function comments()

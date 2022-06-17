@@ -76,4 +76,20 @@ class profileController extends Controller
             'current_password' => 'Your current password is wrong',
         ]);
     }
+
+
+    public function viewFollowings(User $user)
+    {
+
+        return view('users.profileFollowings', [
+            'followings' => $user->followings,
+        ]);
+    }
+
+    public function viewFollowers(User $user)
+    {
+        return view('users.profileFollowers', [
+            'followers' => $user->followers,
+        ]);
+    }
 }

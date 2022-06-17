@@ -63,13 +63,15 @@
                             <p class="text-heading4 font-semibold">{{ $user->postings->count() }}</p>
                             <p class="text-heading5 font-normal">Posts</p>
                         </a>
-                        <a class="text-green-100 text-center px-8">
+                        <a href="{{ route('profile.followings', $user->username) }}"
+                            class="text-green-100 text-center px-8">
                             <p class="text-heading4 font-semibold">{{ $user->followings->count() }}</p>
-                            <p class="text-heading5 font-normal">Following</p>
+                            <p class="text-heading5 font-normal">Followings</p>
                         </a>
-                        <a class="text-green-100 text-center px-8">
+                        <a href="{{ route('profile.followers', $user->username) }}"
+                            class="text-green-100 text-center px-8">
                             <p class="text-heading4 font-semibold">{{ $user->followers->count() }}</p>
-                            <p class="text-heading5 font-normal">Follower</p>
+                            <p class="text-heading5 font-normal">Followers</p>
                         </a>
                     </div>
                 </x-card>
