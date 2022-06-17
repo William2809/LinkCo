@@ -5,12 +5,22 @@
                 <img class="w-14 h-14 rounded-full" src="https://i.pravatar.cc/150" alt="{{ $posting->user->name }}">
             </div>
             <div class="w-[600px]">
-                <div class="flex items-center">
-                    <div class="text-heading4 text-lime-300 font-medium">
-                        <a href="{{ route('profile', $posting->user->username) }}">{{ $posting->user->name }}</a>
+                <div class="flex justify-between">
+                    <div class="flex items-center">
+                        <div class="text-heading4 text-lime-300 font-medium">
+                            <a href="{{ route('profile', $posting->user->username) }}">{{ $posting->user->name }}</a>
+                        </div>
+                        <div class="ml-4 text-green-400">
+                            {{ $posting->created_at->diffForHumans() }}
+                        </div>
                     </div>
-                    <div class="ml-4 text-green-400">
-                        {{ $posting->created_at->diffForHumans() }}
+                    <div class="flex items-center">
+                        <form action="{{ route('posting.delete', $posting) }}" method="post" class="flex items-center">
+                            @csrf
+                            <button>
+                                <x-trashIcon></x-trashIcon>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="text-heading5 text-green-100 font-normal">
@@ -41,7 +51,11 @@
                     {{-- @dd($posting->likes); --}}
                     {{-- @if ($posting->comments)
                     @endif --}}
-                    <button><a href="https://wa.me/{{ $posting->user->phone }}">Contact</a></button>
+                    <button><a href="https://wa.me/{{ $posting->user->phone }}">
+                            <x-contact></x-contact>
+                        </a></button>
+
+
                 </div>
             </div>
         </div>

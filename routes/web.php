@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('posting', [postingController::class, 'store'])->name('posting.store');
 
-
+    Route::post('posting/{posting}/delete', [postingController::class, 'deletePosting'])->name('posting.delete');
 
 
     Route::post('profile/{user}', [followingController::class, 'store'])->name('following.store');

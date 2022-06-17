@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('posting_id')->constrained('postings')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('body');
-            $table->primary(['post_id', 'user_id']);
             $table->timestamps();
         });
     }
