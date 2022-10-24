@@ -20,6 +20,7 @@ class commentController extends Controller
         $posting->comments()->save($comment);
         return redirect()->back();
     }
+    
     public function deleteComment(Comment $comment)
     {
         // dd($posting);
